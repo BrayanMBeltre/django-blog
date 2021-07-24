@@ -1,0 +1,22 @@
+{% extends 'blog/layout.html' %}
+{% block content %}
+
+<article class="media content-section">
+    {% comment %} <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}"> {% endcomment %}
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_objected|date:"F d, Y" }}</small>
+        </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+    {% if post.author == user %}
+    <div>
+        <a class="btn btn-outline-danger" href="{% url "post-delete" object.id %}">Delete</a>
+        <a class="btn btn-outline-primary" href="{% url 'post-update' object.id %}">Update</a>
+    </div>
+    {% endif %}
+</article>
+
+{% endblock content %}
